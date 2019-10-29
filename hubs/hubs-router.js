@@ -101,7 +101,19 @@ router.get('/comment/:id', (req, res) => {
     });
 });
 
-
+router.post('/comment', (req, res) => {
+  Hubs.insertComment(req.body)
+    .then(postid => {
+      res.status(200).json(postid);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: 'Unable to add new post comment',
+      });
+    });
+});
 
 
 module.exports = router;
