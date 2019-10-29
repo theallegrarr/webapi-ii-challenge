@@ -1,7 +1,16 @@
 const express = require('express');
 const cors = require('cors');
-const Hubs = require('./hubs-model.js');
+const router = require('./hubs/hubs-router.js');
 
 const server = express();
 server.use(express.json()); // using a piece of middleware
 
+server.use('/api/posts', router);
+
+server.get('/', (req, res) => {
+  res.send(`
+    HELLO THERE
+  `);
+});
+
+module.exports = server;
