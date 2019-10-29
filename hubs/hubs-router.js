@@ -59,5 +59,19 @@ router.put('/:id', (req, res) => {
     });
 });
 
+router.delete('/:id', (req, res) => {
+  Hubs.remove(req.params.id)
+    .then(postid => {
+      res.status(200).json(postid);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: 'Error deleting existing post',
+      });
+    });
+});
+
 
 module.exports = router;
