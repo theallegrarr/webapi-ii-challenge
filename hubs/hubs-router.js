@@ -73,5 +73,35 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+router.get('/comments/:id', (req, res) => {
+  Hubs.findPostComments(req.params.id)
+    .then(postid => {
+      res.status(200).json(postid);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: 'Unable to fetch post comments',
+      });
+    });
+});
+
+router.get('/comment/:id', (req, res) => {
+  Hubs.findCommentById(req.params.id)
+    .then(postid => {
+      res.status(200).json(postid);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: 'Unable to fetch post comment by ID',
+      });
+    });
+});
+
+
+
 
 module.exports = router;
