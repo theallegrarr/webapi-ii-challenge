@@ -31,5 +31,21 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+  Hubs.insert(req.body)
+    .then(postid => {
+      res.status(200).json(postid);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: 'Error inserting new post',
+      });
+    });
+});
+
+
+
 
 module.exports = router;
