@@ -4,6 +4,7 @@ const router = require('./hubs/hubs-router.js');
 
 const server = express();
 server.use(express.json()); // using a piece of middleware
+server.use(cors());
 
 server.use('/api/posts', router);
 
