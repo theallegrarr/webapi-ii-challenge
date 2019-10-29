@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
       // log error to database
       console.log(error);
       res.status(500).json({
-        message: 'Error retrieving the hubs',
+        message: 'Error retrieving the posts',
       });
     });
 });
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
       // log error to database
       console.log(error);
       res.status(500).json({
-        message: 'Error retrieving the hubs',
+        message: 'Error retrieving the post',
       });
     });
 });
@@ -45,7 +45,19 @@ router.post('/', (req, res) => {
     });
 });
 
-
+router.put('/:id', (req, res) => {
+  Hubs.update(req.params.id, req.body)
+    .then(postid => {
+      res.status(200).json(postid);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: 'Error inserting new post',
+      });
+    });
+});
 
 
 module.exports = router;
